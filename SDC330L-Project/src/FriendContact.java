@@ -1,29 +1,29 @@
 /*
-* Author: Brandy Christopher
+* Name: Brandy Christopher
  * SDC330L Project
- * Date: 10/19/25
+ * Date: 10/28/25 
  * Purpose: Represents a friend contact.
- * Inherits from Contact and adds a short note about how you know the person.
  */
 
 public class FriendContact extends Contact {
-    private String howWeMet; // e.g., College, Neighbor
+    private String howWeMet;
 
-    public FriendContact(String firstName, String lastName, String phone, String email,
+    public FriendContact(String first, String last, String phone, String email,
                          Address address, String howWeMet) {
-        super(firstName, lastName, phone, email, address);
-        this.howWeMet = howWeMet;
+        super(first, last, phone, email, address);
+        this.howWeMet = safe(howWeMet);
     }
 
-    @Override
-    public String getType() {
-        return "Friend";
+    public FriendContact(String first, String last, String howWeMet) {
+        super(first, last);
+        this.howWeMet = safe(howWeMet);
     }
 
+    @Override public String getType() { return "Friend"; }
+
     @Override
-    public String toDisplayString() {
-        String base = super.toDisplayString();
-        String extra = (howWeMet != null && !howWeMet.isBlank()) ? " | Met through: " + howWeMet : "";
-        return base + extra;
+    protected String getBadge() {
+        return (howWeMet == null || howWeMet.isBlank())
+                ? "" : "Met through: " + howWeMet;
     }
 }

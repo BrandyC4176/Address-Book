@@ -1,6 +1,7 @@
 /*
-* Author: Brandy Christopher
+* Name: Brandy Christopher
  * SDC330L Project
+ * Date: 10/28/25 
  * Date: 10/19/25 
  * Purpose: Interface to standardize how objects render a single-line display string.
  */

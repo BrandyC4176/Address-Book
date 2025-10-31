@@ -1,9 +1,8 @@
 /*
- * Author: Brandy Christopher
+* Name: Brandy Christopher
  * SDC330L Project
- * Date: 10/19/25
- * Purpose: In-memory repository to add, update, remove, and query contacts.
- * Keeps UI logic out of data management (clean separation).
+ * Date: 10/28/25 
+ * Purpose: Manages contacts list in memory.
  */
 
 import java.util.*;
@@ -25,8 +24,8 @@ public class ContactRepository {
     public List<Contact> getByLastNameInitial(char letter) {
         char target = Character.toUpperCase(letter);
         return contacts.stream()
-                .filter(c -> !c.getLastName().isEmpty() &&
-                        Character.toUpperCase(c.getLastName().charAt(0)) == target)
+                .filter(c -> !c.getLastName().isEmpty()
+                        && Character.toUpperCase(c.getLastName().charAt(0)) == target)
                 .collect(Collectors.toList());
     }
 }

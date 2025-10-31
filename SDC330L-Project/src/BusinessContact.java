@@ -1,35 +1,39 @@
 /*
- * Author: Brandy Christopher
+* Name: Brandy Christopher
  * SDC330L Project
- * Date: 10/19/25
+ * Date: 10/28/25 
  * Purpose: Represents a business contact.
- * Inherits from Contact and adds company/job title info.
- * Also shows composition since it includes a Company object.
  */
 
 public class BusinessContact extends Contact {
-    private Company company;  // Composition
+    private Company company;
     private String jobTitle;
 
-    public BusinessContact(String firstName, String lastName, String phone, String email,
+    public BusinessContact(String first, String last, String phone, String email,
                            Address address, Company company, String jobTitle) {
-        super(firstName, lastName, phone, email, address);
+        super(first, last, phone, email, address);
         this.company  = company;
-        this.jobTitle = jobTitle;
+        this.jobTitle = safe(jobTitle);
+    }
+
+    public BusinessContact(String first, String last, String phone, String email, Company company) {
+        this(first, last, phone, email, null, company, "");
+    }
+
+    public BusinessContact(String first, String last, Company company) {
+        super(first, last);
+        this.company  = company;
+        this.jobTitle = "";
+    }
+
+    @Override public String getType() { return "Business"; }
+
+    @Override
+    protected String getBadge() {
+        String co = (company != null ? company.toDisplayString() : "No Company");
+        String jt = (jobTitle == null || jobTitle.isBlank()) ? "" : (" | Title: " + jobTitle);
+        return "Company: " + co + jt;
     }
 
     public Company getCompany() { return company; }
-
-    @Override
-    public String getType() {
-        return "Business";
-    }
-
-    @Override
-    public String toDisplayString() {
-        String base = super.toDisplayString();
-        String co   = (company != null ? " | Company: " + company.toDisplayString() : "");
-        String jt   = (jobTitle != null && !jobTitle.isBlank() ? " | Title: " + jobTitle : "");
-        return base + co + jt;
-    }
 }

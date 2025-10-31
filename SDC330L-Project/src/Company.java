@@ -1,9 +1,8 @@
 /*
- * Author: Brandy Christopher
+* Name: Brandy Christopher
  * SDC330L Project
- * Date: 10/19/25
- * Purpose: Represents a company.
- * Used as part of a BusinessContact to show composition.
+ * Date: 10/28/25 
+ * Purpose: Company value object implementing Displayable.
  */
 
 public class Company implements Interface {
@@ -11,18 +10,23 @@ public class Company implements Interface {
     private String mainPhone;
 
     public Company(String name, String mainPhone) {
-        this.name      = name;
-        this.mainPhone = mainPhone;
+        this.name      = safe(name);
+        this.mainPhone = safe(mainPhone);
     }
 
-    // INTERFACE IMPLEMENTATION: Interface
+    public Company(String name) {
+        this(name, "");
+    }
+
+    private String safe(String s) { return s == null ? "" : s.trim(); }
+
     @Override
     public String toDisplayString() {
-        return String.format("%s (Main: %s)", name, mainPhone);
+        return String.format("%s%s",
+                name.isEmpty() ? "(Unnamed Company)" : name,
+                mainPhone.isEmpty() ? "" : " (Main: " + mainPhone + ")");
     }
 
     @Override
-    public String toString() {
-        return toDisplayString();
-    }
+    public String toString() { return toDisplayString(); }
 }
