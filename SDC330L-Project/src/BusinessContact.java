@@ -1,10 +1,8 @@
-/*
-* Name: Brandy Christopher
- * SDC330L Project
- * Date: 10/28/25 
- * Purpose: Represents a business contact.
+/*****
+ * Name: Brandy Christopher
+ * Date: 11/1/25
+ * Purpose: Business contact (inheritance + composition with Company).
  */
-
 public class BusinessContact extends Contact {
     private Company company;
     private String jobTitle;
@@ -13,11 +11,7 @@ public class BusinessContact extends Contact {
                            Address address, Company company, String jobTitle) {
         super(first, last, phone, email, address);
         this.company  = company;
-        this.jobTitle = safe(jobTitle);
-    }
-
-    public BusinessContact(String first, String last, String phone, String email, Company company) {
-        this(first, last, phone, email, null, company, "");
+        this.jobTitle = (jobTitle == null ? "" : jobTitle.trim());
     }
 
     public BusinessContact(String first, String last, Company company) {
@@ -36,4 +30,5 @@ public class BusinessContact extends Contact {
     }
 
     public Company getCompany() { return company; }
+    public String getJobTitle() { return jobTitle; }
 }
