@@ -60,3 +60,5 @@ This project is a multi-week Java application designed to demonstrate core objec
 
 
 
+## Youtube link to presentation of application:
+* https://youtu.be/8ae9Ahs1R7c
